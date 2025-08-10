@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoltAI API Documentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #2563eb;
+    --primary-dark: #1d4ed8;
+    --secondary-color: #10b981;
+    --background: #ffffff;
+    --surface: #f8fafc;
+    --surface-light: #e2e8f0;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --code-bg: #f1f5f9;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --error: #ef4444;
+    --sidebar-width: 280px;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--background);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+p {
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+
+.lead {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--primary-dark);
+}
+
+code {
+    font-family: 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
+    background-color: var(--code-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1001;
+    background-color: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.mobile-menu-toggle:hover {
+    background-color: var(--surface-light);
+}
+
+.mobile-menu-toggle i {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: var(--sidebar-width);
+    background-color: var(--surface);
+    border-right: 1px solid var(--border-color);
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.sidebar-header {
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar-header h2 {
+    font-size: 1.5rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+}
+
+.sidebar-header i {
+    color: var(--primary-color);
+}
+
+.close-menu {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-menu:hover {
+    color: var(--text-primary);
+}
+
+/* Navigation Menu */
+.nav-menu {
+    list-style: none;
+    padding: 1rem 0;
+}
+
+.nav-item {
+    margin: 0;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.5rem;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.nav-link:hover {
+    background-color: var(--surface-light);
+    color: var(--text-primary);
+}
+
+.nav-link.active {
+    background-color: rgba(37, 99, 235, 0.1);
+    color: var(--primary-color);
+    border-left-color: var(--primary-color);
+}
+
+.nav-link i {
+    width: 20px;
+    text-align: center;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: var(--sidebar-width);
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+.content-section {
+    display: none;
+    max-width: 1200px;
+    margin: 0 auto;
+    animation: fadeIn 0.5s ease;
+}
+
+.content-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Cards */
+.info-card {
+    background-color: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.info-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.info-card ol, .info-card ul {
+    margin-left: 1.5rem;
+    color: var(--text-secondary);
+}
+
+.info-card li {
+    margin-bottom: 0.5rem;
+}
+
+/* Code Blocks */
+.code-block {
+    background-color: var(--code-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.code-header {
+    background-color: var(--surface-light);
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.code-header span {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.copy-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.copy-btn:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--text-primary);
+}
+
+.code-block pre {
+    padding: 1.5rem;
+    overflow-x: auto;
+    margin: 0;
+}
+
+.code-block code {
+    background: none;
+    padding: 0;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+/* Endpoint Cards */
+.endpoint-card {
+    background-color: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.endpoint-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.method {
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.method.get {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.method.post {
+    background-color: rgba(37, 99, 235, 0.1);
+    color: var(--primary-color);
+    border: 1px solid rgba(37, 99, 235, 0.3);
+}
+
+.endpoint-path {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Models Grid */
+.models-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.model-category {
+    background-color: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.model-category h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.model-list {
+    list-style: none;
+}
+
+.model-list li {
+    padding: 0.5rem 0;
+    color: var(--text-secondary);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.model-list li:last-child {
+    border-bottom: none;
+}
+
+/* Pricing Grid */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.pricing-card {
+    background-color: var(--surface);
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.pricing-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.pricing-card.enterprise {
+    border-color: var(--primary-color);
+}
+
+.pricing-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.pricing-header h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+}
+
+.price {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.price span {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+.badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.features-list {
+    list-style: none;
+}
+
+.features-list li {
+    padding: 0.75rem 0;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.features-list li i {
+    color: var(--success);
+    margin-top: 0.25rem;
+}
+
+.sub-feature {
+    margin-left: 2rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+/* Example Cards */
+.example-card {
+    background-color: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.example-card h3 {
+    margin-bottom: 1rem;
+}
+
+/* Rate Limit Table */
+.rate-limit-table {
+    overflow-x: auto;
+    margin-bottom: 2rem;
+}
+
+table {
+    width: 100%;
+    background-color: var(--surface);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    background-color: var(--surface-light);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+td {
+    color: var(--text-secondary);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* Support Grid */
+.support-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.support-card {
+    background-color: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.support-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.support-card i {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.support-card h3 {
+    margin-bottom: 1rem;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .close-menu {
+        display: block;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 4rem 1rem 2rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .models-grid,
+    .pricing-grid,
+    .support-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pricing-card {
+        max-width: 100%;
+    }
+
+    .price {
+        font-size: 2.5rem;
+    }
+
+    .code-block pre {
+        padding: 1rem;
+        font-size: 0.75rem;
+    }
+
+    table {
+        font-size: 0.875rem;
+    }
+
+    th, td {
+        padding: 0.75rem;
+    }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--surface-light);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--border-color);
+}
+
+/* Utility Classes */
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+/* Search Input */
+.search-input {
+    width: calc(100% - 3rem);
+    padding: 0.75rem 1rem;
+    margin: 1rem 1.5rem;
+    background-color: var(--background);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: var(--primary-color);
+}
+
+.search-input::placeholder {
+    color: var(--text-secondary);
+}
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-bolt"></i> VoltAI API</h2>
+            <button class="close-menu" id="closeMenu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <input type="search" placeholder="Search documentation..." class="search-input" id="searchInput">
+
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="#getting-started" class="nav-link active">
+                    <i class="fas fa-rocket"></i> Getting Started
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#authentication" class="nav-link">
+                    <i class="fas fa-key"></i> Authentication
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#endpoints" class="nav-link">
+                    <i class="fas fa-plug"></i> API Endpoints
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#text-models" class="nav-link">
+                    <i class="fas fa-comments"></i> Text Models
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#image-models" class="nav-link">
+                    <i class="fas fa-image"></i> Image Models
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#embedding-models" class="nav-link">
+                    <i class="fas fa-vector-square"></i> Embedding Models
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#pricing" class="nav-link">
+                    <i class="fas fa-dollar-sign"></i> Pricing Plans
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#examples" class="nav-link">
+                    <i class="fas fa-code"></i> Example Requests
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#rate-limits" class="nav-link">
+                    <i class="fas fa-tachometer-alt"></i> Rate Limits
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#support" class="nav-link">
+                    <i class="fas fa-life-ring"></i> Support
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Getting Started Section -->
+        <section id="getting-started" class="content-section active">
+            <h1>Getting Started with VoltAI API</h1>
+            <p class="lead">Welcome to VoltAI API documentation. Get started with our powerful AI models in minutes.</p>
+
+            <div class="info-card">
+                <h3><i class="fas fa-info-circle"></i> Quick Start</h3>
+                <ol>
+                    <li>Join our Discord server to get your API key</li>
+                    <li>Use the <code>/generate</code> command in Discord</li>
+                    <li>Start making requests to our API endpoints</li>
+                </ol>
+            </div>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Base URL</span>
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+                <pre><code>https://api.voltapi.online/v1</code></pre>
+            </div>
+        </section>
+
+        <!-- Authentication Section -->
+        <section id="authentication" class="content-section">
+            <h1>Authentication</h1>
+            <p>All API requests require authentication using an API key.</p>
+
+            <div class="info-card">
+                <h3><i class="fas fa-shield-alt"></i> Getting Your API Key</h3>
+                <p>To obtain your API key:</p>
+                <ol>
+                    <li>Join our Discord server</li>
+                    <li>Navigate to the appropriate channel</li>
+                    <li>Use the <code>/generate</code> command</li>
+                    <li>Your unique API key will be generated and sent to you</li>
+                </ol>
+            </div>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Header Authentication</span>
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+                <pre><code>Authorization: Bearer YOUR_API_KEY</code></pre>
+            </div>
+        </section>
+
+        <!-- API Endpoints Section -->
+        <section id="endpoints" class="content-section">
+            <h1>API Endpoints</h1>
+            <p>VoltAI provides the following endpoints for interacting with our AI models.</p>
+
+            <div class="endpoint-card">
+                <div class="endpoint-header">
+                    <span class="method get">GET</span>
+                    <span class="endpoint-path">/v1/models</span>
+                </div>
+                <p>List all available models</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Example Request</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <pre><code>curl https://api.voltapi.online/v1/models \
+  -H "Authorization: Bearer YOUR_API_KEY"</code></pre>
+                </div>
+            </div>
+
+            <div class="endpoint-card">
+                <div class="endpoint-header">
+                    <span class="method post">POST</span>
+                    <span class="endpoint-path">/v1/chat/completions</span>
+                </div>
+                <p>Create a chat completion</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Example Request</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <pre><code>curl https://api.voltapi.online/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -d '{
+    "model": "gpt-4o",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Hello, how are you?"
+      }
+    ]
+  }'</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Text Models Section -->
+        <section id="text-models" class="content-section">
+            <h1>Text Generation Models</h1>
+            <p>VoltAI offers a comprehensive selection of text generation models from various providers.</p>
+
+            <div class="models-grid">
+                <div class="model-category">
+                    <h3><i class="fas fa-brain"></i> OpenAI Models</h3>
+                    <ul class="model-list">
+                        <li>gpt-4o</li>
+                        <li>gpt-4o-mini</li>
+                        <li>gpt-4-turbo</li>
+                        <li>gpt-4.1</li>
+                        <li>gpt-4.1-nano</li>
+                        <li>gpt-4.5-preview</li>
+                        <li>chatgpt-4o-latest</li>
+                        <li>gpt-3.5-turbo</li>
+                        <li>gpt-oss-120b</li>
+                        <li>o3</li>
+                        <li>o3-mini</li>
+                        <li>o3-mini-pollination</li>
+                        <li>o4-mini</li>
+                    </ul>
+                </div>
+
+                <div class="model-category">
+                    <h3><i class="fas fa-robot"></i> Claude Models</h3>
+                    <ul class="model-list">
+                        <li>claude</li>
+                        <li>claude-sonnet-4</li>
+                        <li>claude-sonnet-3.7-thinking</li>
+                        <li>claude-3.7-thinking</li>
+                        <li>claude-3.5-sonnet</li>
+                        <li>claude-3-7-sonnet-20250219</li>
+                        <li>claude-thinking</li>
+                        <li>claude-opus-4</li>
+                        <li>claude-opus-4.1t</li>
+                        <li>anthropic/claude-3-haiku</li>
+                    </ul>
+                </div>
+
+                <div class="model-category">
+                    <h3><i class="fas fa-brain"></i> Grok Models</h3>
+                    <ul class="model-list">
+                        <li>grok-4</li>
+                        <li>grok-4-0709</li>
+                        <li>Grok-3-mini</li>
+                    </ul>
+                </div>
+
+                <div class="model-category">
+                    <h3><i class="fas fa-microchip"></i> Meta/Llama Models</h3>
+                    <ul class="model-list">
+                        <li>meta-llama/llama-guard-4-12b</li>
+                        <li>meta-llama/llama-3.2-3b-instruct</li>
+                        <li>llama-4-scout</li>
+                    </ul>
+                </div>
+
+                <div class="model-category">
+                    <h3><i class="fas fa-gem"></i> Google Models</h3>
+                    <ul class="model-list">
+                        <li>google/gemini-2.5-flash-preview-05-20</li>
+                        <li>gemini-2.5-flash-lite-preview-06-17</li>
+                        <li>gemini-2.5-pro</li>
+                        <li>gemini-2.0-flash</li>
+                    </ul>
+                </div>
+
+                <div class="model-category">
+                    <h3><i class="fas fa-database"></i> DeepSeek Models</h3>
+                    <ul class="model-list">
+                        <li>DeepSeek-V3</li>
+                        <li>DeepSeek-R1-0528</li>
+                    </ul>
+                </div>
+
+                <div class="model-category">
+                    <h3><i class="fas fa-code"></i> Qwen Models</h3>
+                    <ul class="model-list">
+                        <li>qwen/qwen3-30b-a3b</li>
+                        <li>Qwen3-235B-A22B-Instruct-2507</li>
+                        <li>Qwen-2.5-Coder-32B</li>
+                    </ul>
+                </div>
+
+                <div class="model-category">
+                    <h3><i class="fas fa-wand-magic-sparkles"></i> Mistral Models</h3>
+                    <ul class="model-list">
+                        <li>mistralai/mixtral-8x7b-instruct</li>
+                        <li>mistralai/mistral-nemo</li>
+                        <li>mistral-large</li>
+                        <li>devstral-small</li>
+                    </ul>
+                </div>
+
+                <div class="model-category">
+                    <h3><i class="fas fa-cubes"></i> Other Models</h3>
+                    <ul class="model-list">
+                        <li>microsoft/phi-4-reasoning-plus</li>
+                        <li>command-a</li>
+                        <li>kimi-k2</li>
+                        <li>sonar-reasoning</li>
+                        <li>sonar-reasoning-pro</li>
+                        <li>sonar-deep-research</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Models Section -->
+        <section id="image-models" class="content-section">
+            <h1>Image Generation Models</h1>
+            <p>Create stunning images with our FLUX models from Black Forest Labs.</p>
+
+            <div class="models-grid">
+                <div class="model-category">
+                    <h3><i class="fas fa-image"></i> FLUX Models</h3>
+                    <ul class="model-list">
+                        <li>black-forest-labs/FLUX.1-schnell</li>
+                        <li>black-forest-labs/FLUX.1-dev</li>
+                        <li>black-forest-labs/FLUX.1-kontext-pro</li>
+                        <li>black-forest-labs/FLUX.1-kontext-max</li>
+                        <li>black-forest-labs/FLUX.1-kontext-dev</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3><i class="fas fa-info-circle"></i> Image Generation Usage</h3>
+                <p>Use the <code>/v1/images/generations</code> endpoint to generate images. Specify the model, prompt, and desired image size.</p>
+            </div>
+        </section>
+
+        <!-- Embedding Models Section -->
+        <section id="embedding-models" class="content-section">
+            <h1>Embedding Models</h1>
+            <p>Convert text into vector representations for semantic search and similarity tasks.</p>
+
+            <div class="models-grid">
+                <div class="model-category">
+                    <h3><i class="fas fa-vector-square"></i> Available Embedding Models</h3>
+                    <ul class="model-list">
+                        <li>togethercomputer/m2-bert-80M-8k-retrieval</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3><i class="fas fa-info-circle"></i> Embedding Usage</h3>
+                <p>Use embedding models to convert text into high-dimensional vectors for:</p>
+                <ul>
+                    <li>Semantic search applications</li>
+                    <li>Document similarity comparison</li>
+                    <li>Content recommendation systems</li>
+                    <li>Clustering and classification tasks</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="content-section">
+            <h1>Pricing Plans</h1>
+            <p>Choose the plan that best fits your needs.</p>
+
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Premium</h3>
+                        <div class="price">$10<span>/month</span></div>
+                    </div>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Access to Premium Models:</li>
+                        <li class="sub-feature">ChatGPT-4o (Latest)</li>
+                        <li class="sub-feature">GPT-4.5 Preview</li>
+                        <li class="sub-feature">Claude 3.5 & 3.7 (Sonnet)</li>
+                        <li class="sub-feature">claude-sonnet-4-20250514-thinking</li>
+                        <li class="sub-feature">Claude Sonnet 4 (2025-05-14)</li>
+                        <li class="sub-feature">GPT 5 NANO</li>
+                        <li class="sub-feature">GPT 5 MINI</li>
+                        <li class="sub-feature">GPT 5</li>
+                        <li class="sub-feature">Gemini 2.5 Pro</li>
+                        <li class="sub-feature">DeepSeek R1</li>
+                        <li class="sub-feature">Kimi-K2</li>
+                        <li class="sub-feature">Grok-4 (0709)</li>
+                        <li class="sub-feature">FLUX.1 (Kontext Pro & Max)</li>
+                        <li><i class="fas fa-check"></i> 20 requests/minute</li>
+                        <li><i class="fas fa-check"></i> Daily limits:</li>
+                        <li class="sub-feature">Claude models → 150 requests/day</li>
+                        <li class="sub-feature">Other premium models → 2,000 requests/day</li>
+                        <li><i class="fas fa-check"></i> Faster speeds and responses</li>
+                    </ul>
+                </div>
+
+                <div class="pricing-card enterprise">
+                    <div class="pricing-header">
+                        <h3>Enterprise</h3>
+                        <div class="price">$25<span>/month</span></div>
+                        <span class="badge">Scalable</span>
+                    </div>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> All Premium models included</li>
+                        <li><i class="fas fa-check"></i> Usage Limits:</li>
+                        <li class="sub-feature">Claude 4 Opus → 500 messages/day (80k context)</li>
+                        <li class="sub-feature">Claude 4.1 Opus → 350 messages/day (80k context)</li>
+                        <li class="sub-feature">All other premium models → 4000 messages/day</li>
+                        <li><i class="fas fa-check"></i> 25 requests per minute</li>
+                        <li><i class="fas fa-check"></i> Scalable Daily Limits</li>
+                        <li class="sub-feature">You choose the limits, we calculate the monthly cost</li>
+                        <li><i class="fas fa-check"></i> Context window can be increased</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Examples Section -->
+        <section id="examples" class="content-section">
+            <h1>Example Requests</h1>
+            <p>Here are some examples to help you get started with the VoltAI API.</p>
+
+            <div class="example-card">
+                <h3>Basic Chat Completion</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <pre><code>import requests
+
+url = "https://api.voltapi.online/v1/chat/completions"
+headers = {
+    "Authorization": "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json"
+}
+data = {
+    "model": "gpt-4o",
+    "messages": [
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "What is the capital of France?"}
+    ]
+}
+
+response = requests.post(url, headers=headers, json=data)
+print(response.json())</code></pre>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <h3>Using Claude Models</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>JavaScript</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <pre><code>const response = await fetch('https://api.voltapi.online/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+        'Authorization': 'Bearer YOUR_API_KEY',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        model: 'claude-3.5-sonnet',
+        messages: [
+            {
+                role: 'user',
+                content: 'Explain quantum computing in simple terms'
+            }
+        ],
+        max_tokens: 500
+    })
+});
+
+const data = await response.json();
+console.log(data.choices[0].message.content);</code></pre>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <h3>Image Generation with FLUX</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>cURL</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <pre><code>curl -X POST https://api.voltapi.online/v1/images/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "black-forest-labs/FLUX.1-dev",
+    "prompt": "A serene landscape with mountains and a lake at sunset",
+    "n": 1,
+    "size": "1024x1024"
+  }'</code></pre>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <h3>Streaming Response</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <pre><code>import requests
+import json
+
+url = "https://api.voltapi.online/v1/chat/completions"
+headers = {
+    "Authorization": "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json"
+}
+data = {
+    "model": "gpt-4o",
+    "messages": [{"role": "user", "content": "Write a story"}],
+    "stream": True
+}
+
+response = requests.post(url, headers=headers, json=data, stream=True)
+
+for line in response.iter_lines():
+    if line:
+        if line.startswith(b'data: '):
+            try:
+                chunk = json.loads(line[6:])
+                if chunk['choices'][0]['delta'].get('content'):
+                    print(chunk['choices'][0]['delta']['content'], end='')
+            except:
+                pass</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rate Limits Section -->
+        <section id="rate-limits" class="content-section">
+            <h1>Rate Limits</h1>
+            <p>Understanding our rate limiting helps you optimize your API usage.</p>
+
+            <div class="rate-limit-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Plan</th>
+                            <th>Requests/Minute</th>
+                            <th>Daily Limits</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Free</td>
+                            <td>5</td>
+                            <td>500 requests/day</td>
+                        </tr>
+                        <tr>
+                            <td>Premium</td>
+                            <td>20</td>
+                            <td>Claude: 150/day<br>Others: 2,000/day</td>
+                        </tr>
+                        <tr>
+                            <td>Enterprise</td>
+                            <td>25</td>
+                            <td>Claude 4 Opus: 500/day<br>Claude 4.1 Opus: 350/day<br>Others: 4,000/day</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="info-card">
+                <h3><i class="fas fa-exclamation-triangle"></i> Rate Limit Headers</h3>
+                <p>Each API response includes headers indicating your current rate limit status:</p>
+                <ul>
+                    <li><code>X-RateLimit-Limit</code> - Your rate limit</li>
+                    <li><code>X-RateLimit-Remaining</code> - Requests remaining</li>
+                    <li><code>X-RateLimit-Reset</code> - Time when the limit resets</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Support Section -->
+        <section id="support" class="content-section">
+            <h1>Support</h1>
+            <p>Need help? We're here to assist you.</p>
+
+            <div class="support-grid">
+                <div class="support-card">
+                    <i class="fas fa-discord fa-3x"></i>
+                    <h3>Discord Community</h3>
+                    <p>Join our Discord server for real-time support and community discussions.</p>
+                    <a href="#" class="btn btn-primary">Join Discord</a>
+                </div>
+
+                <div class="support-card">
+                    <i class="fas fa-book fa-3x"></i>
+                    <h3>Documentation</h3>
+                    <p>Browse our comprehensive documentation for detailed guides and references.</p>
+                    <a href="#getting-started" class="btn btn-primary">View Docs</a>
+                </div>
+
+                <div class="support-card">
+                    <i class="fas fa-envelope fa-3x"></i>
+                    <h3>Email Support</h3>
+                    <p>For enterprise inquiries and technical issues, reach out via email.</p>
+                    <a href="mailto:support@voltapi.online" class="btn btn-primary">Contact Us</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+// Test to verify script is loading
+console.log('Script loaded successfully!');
+
+// DOM Elements
+const sidebar = document.getElementById('sidebar');
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const closeMenu = document.getElementById('closeMenu');
+const navLinks = document.querySelectorAll('.nav-link');
+const contentSections = document.querySelectorAll('.content-section');
+const searchInput = document.getElementById('searchInput');
+
+// Mobile Menu Toggle
+mobileMenuToggle.addEventListener('click', () => {
+    sidebar.classList.add('active');
+});
+
+closeMenu.addEventListener('click', () => {
+    sidebar.classList.remove('active');
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768) {
+        if (!sidebar.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+            sidebar.classList.remove('active');
+        }
+    }
+});
+
+// Navigation functionality
+navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        // Remove active class from all links and sections
+        navLinks.forEach(l => l.classList.remove('active'));
+        contentSections.forEach(section => section.classList.remove('active'));
+
+        // Add active class to clicked link
+        link.classList.add('active');
+
+        // Show corresponding section
+        const targetId = link.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+            targetSection.classList.add('active');
+        }
+
+        // Close mobile menu if open
+        if (window.innerWidth <= 768) {
+            sidebar.classList.remove('active');
+        }
+
+        // Scroll to top of page
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+});
+
+// Copy code functionality
+function copyCode(button) {
+    const codeBlock = button.closest('.code-block');
+    const code = codeBlock.querySelector('code').textContent;
+
+    // Create temporary textarea
+    const textarea = document.createElement('textarea');
+    textarea.value = code;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+
+    // Select and copy
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+
+    // Show feedback
+    const originalIcon = button.innerHTML;
+    button.innerHTML = '<i class="fas fa-check"></i>';
+    button.style.color = '#10b981';
+
+    setTimeout(() => {
+        button.innerHTML = originalIcon;
+        button.style.color = '';
+    }, 2000);
+}
+
+// Handle hash in URL on page load
+window.addEventListener('load', () => {
+    const hash = window.location.hash;
+    if (hash) {
+        const targetLink = document.querySelector(`a[href="${hash}"]`);
+        if (targetLink) {
+            targetLink.click();
+        }
+    }
+});
+
+// Update URL hash when navigating
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        const hash = link.getAttribute('href');
+        history.pushState(null, null, hash);
+    });
+});
+
+// Search functionality
+searchInput.addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+
+    navLinks.forEach(link => {
+        const linkText = link.textContent.toLowerCase();
+        const parentItem = link.parentElement;
+
+        if (searchTerm === '' || linkText.includes(searchTerm)) {
+            parentItem.style.display = 'block';
+        } else {
+            parentItem.style.display = 'none';
+        }
+    });
+});
+
+// Handle responsive behavior
+let resizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        if (window.innerWidth > 768) {
+            sidebar.classList.remove('active');
+        }
+    }, 250);
+});
+
+// Add keyboard navigation
+document.addEventListener('keydown', (e) => {
+    // Toggle mobile menu with Escape key
+    if (e.key === 'Escape' && window.innerWidth <= 768) {
+        sidebar.classList.remove('active');
+    }
+
+    // Navigate sections with arrow keys
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        const activeLink = document.querySelector('.nav-link.active');
+        const allLinks = Array.from(navLinks);
+        const currentIndex = allLinks.indexOf(activeLink);
+
+        if (e.key === 'ArrowDown' && currentIndex < allLinks.length - 1) {
+            e.preventDefault();
+            allLinks[currentIndex + 1].click();
+        } else if (e.key === 'ArrowUp' && currentIndex > 0) {
+            e.preventDefault();
+            allLinks[currentIndex - 1].click();
+        }
+    }
+});
+
+// Console welcome message
+console.log('%c🚀 Welcome to VoltAI API Documentation!', 
+    'color: #2563eb; font-size: 20px; font-weight: bold; padding: 10px;');
+console.log('%cJoin our Discord for API keys: /generate', 
+    'color: #64748b; font-size: 14px; padding: 5px;');
+    </script>
+</body>
+</html>

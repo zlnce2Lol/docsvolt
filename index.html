@@ -676,6 +676,250 @@ tr:last-child td {
 .text-center { text-align: center; }
 .text-right { text-align: right; }
 
+/* Refund Policy Styles */
+.policy-link {
+    color: var(--primary-color);
+    text-decoration: underline;
+    margin-left: 0.5rem;
+}
+
+.policy-link:hover {
+    color: var(--primary-dark);
+}
+
+.btn-link {
+    color: var(--primary-color);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-link:hover {
+    gap: 0.75rem;
+    color: var(--primary-dark);
+}
+
+.refund-info {
+    background-color: rgba(37, 99, 235, 0.1);
+    border-color: var(--primary-color);
+    margin-top: 2rem;
+}
+
+.policy-section {
+    margin-bottom: 3rem;
+}
+
+.policy-section h2 {
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.policy-card {
+    background-color: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.policy-card h4 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.policy-card ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.policy-card ul li {
+    color: var(--text-secondary);
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.policy-card ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--text-secondary);
+}
+
+.policy-card.success {
+    background-color: rgba(16, 185, 129, 0.1);
+    border-color: var(--success);
+}
+
+.policy-card.success h4 {
+    color: var(--success);
+}
+
+/* Process Steps */
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.step {
+    position: relative;
+    background-color: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.step:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.step-number {
+    position: absolute;
+    top: -15px;
+    left: 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.step h4 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+}
+
+.step ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.step ul li {
+    color: var(--text-secondary);
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.step ul li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+}
+
+/* Warning Card */
+.warning-card {
+    background-color: rgba(245, 158, 11, 0.1);
+    border: 1px solid var(--warning);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.warning-card ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.warning-card ul li {
+    color: var(--text-secondary);
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.warning-card ul li::before {
+    content: "⚠";
+    position: absolute;
+    left: 0;
+    color: var(--warning);
+}
+
+/* Contact Section */
+.contact-section {
+    background-color: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 3rem;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.contact-section h2 {
+    justify-content: center;
+}
+
+.contact-methods {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.contact-card:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.contact-card i {
+    font-size: 1.5rem;
+}
+
+/* Responsive adjustments for refund policy */
+@media (max-width: 768px) {
+    .process-steps {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-methods {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .contact-card {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+}
+
 /* Search Input */
 .search-input {
     width: calc(100% - 3rem);
@@ -713,9 +957,9 @@ tr:last-child td {
                 <i class="fas fa-times"></i>
             </button>
         </div>
-
+        
         <input type="search" placeholder="Search documentation..." class="search-input" id="searchInput">
-
+        
         <ul class="nav-menu">
             <li class="nav-item">
                 <a href="#getting-started" class="nav-link active">
@@ -753,6 +997,11 @@ tr:last-child td {
                 </a>
             </li>
             <li class="nav-item">
+                <a href="#refund-policy" class="nav-link">
+                    <i class="fas fa-undo-alt"></i> Refund Policy
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="#examples" class="nav-link">
                     <i class="fas fa-code"></i> Example Requests
                 </a>
@@ -776,7 +1025,7 @@ tr:last-child td {
         <section id="getting-started" class="content-section active">
             <h1>Getting Started with VoltAI API</h1>
             <p class="lead">Welcome to VoltAI API documentation. Get started with our powerful AI models in minutes.</p>
-
+            
             <div class="info-card">
                 <h3><i class="fas fa-info-circle"></i> Quick Start</h3>
                 <ol>
@@ -801,7 +1050,7 @@ tr:last-child td {
         <section id="authentication" class="content-section">
             <h1>Authentication</h1>
             <p>All API requests require authentication using an API key.</p>
-
+            
             <div class="info-card">
                 <h3><i class="fas fa-shield-alt"></i> Getting Your API Key</h3>
                 <p>To obtain your API key:</p>
@@ -828,7 +1077,7 @@ tr:last-child td {
         <section id="endpoints" class="content-section">
             <h1>API Endpoints</h1>
             <p>VoltAI provides the following endpoints for interacting with our AI models.</p>
-
+            
             <div class="endpoint-card">
                 <div class="endpoint-header">
                     <span class="method get">GET</span>
@@ -880,7 +1129,7 @@ tr:last-child td {
         <section id="text-models" class="content-section">
             <h1>Text Generation Models</h1>
             <p>VoltAI offers a comprehensive selection of text generation models from various providers.</p>
-
+            
             <div class="models-grid">
                 <div class="model-category">
                     <h3><i class="fas fa-brain"></i> OpenAI Models</h3>
@@ -958,7 +1207,6 @@ tr:last-child td {
                     <ul class="model-list">
                         <li>qwen/qwen3-30b-a3b</li>
                         <li>Qwen3-235B-A22B-Instruct-2507</li>
-                        <li>qwen3-coder-480b-a35b</li>li>
                         <li>Qwen-2.5-Coder-32B</li>
                     </ul>
                 </div>
@@ -991,7 +1239,7 @@ tr:last-child td {
         <section id="image-models" class="content-section">
             <h1>Image Generation Models</h1>
             <p>Create stunning images with our FLUX models from Black Forest Labs.</p>
-
+            
             <div class="models-grid">
                 <div class="model-category">
                     <h3><i class="fas fa-image"></i> FLUX Models</h3>
@@ -1015,7 +1263,7 @@ tr:last-child td {
         <section id="embedding-models" class="content-section">
             <h1>Embedding Models</h1>
             <p>Convert text into vector representations for semantic search and similarity tasks.</p>
-
+            
             <div class="models-grid">
                 <div class="model-category">
                     <h3><i class="fas fa-vector-square"></i> Available Embedding Models</h3>
@@ -1040,8 +1288,8 @@ tr:last-child td {
         <!-- Pricing Section -->
         <section id="pricing" class="content-section">
             <h1>Pricing Plans</h1>
-            <p>Choose the plan that best fits your needs.</p>
-
+            <p>Choose the plan that best fits your needs. <a href="#refund-policy" class="policy-link">View our refund policy</a></p>
+            
             <div class="pricing-grid">
                 <div class="pricing-card">
                     <div class="pricing-header">
@@ -1090,13 +1338,18 @@ tr:last-child td {
                     </ul>
                 </div>
             </div>
+            
+            <div class="info-card refund-info">
+                <h3><i class="fas fa-undo-alt"></i> Our Refund Policy</h3>
+                <p>We offer refunds under specific conditions to ensure fairness for all users. <a href="#refund-policy" class="btn-link nav-link">Read full refund policy →</a></p>
+            </div>
         </section>
 
         <!-- Examples Section -->
         <section id="examples" class="content-section">
             <h1>Example Requests</h1>
             <p>Here are some examples to help you get started with the VoltAI API.</p>
-
+            
             <div class="example-card">
                 <h3>Basic Chat Completion</h3>
                 <div class="code-block">
@@ -1221,7 +1474,7 @@ for line in response.iter_lines():
         <section id="rate-limits" class="content-section">
             <h1>Rate Limits</h1>
             <p>Understanding our rate limiting helps you optimize your API usage.</p>
-
+            
             <div class="rate-limit-table">
                 <table>
                     <thead>
@@ -1234,8 +1487,8 @@ for line in response.iter_lines():
                     <tbody>
                         <tr>
                             <td>Free</td>
-                            <td>5</td>
-                            <td>500 requests/day</td>
+                            <td>10</td>
+                            <td>100 requests/day</td>
                         </tr>
                         <tr>
                             <td>Premium</td>
@@ -1266,7 +1519,7 @@ for line in response.iter_lines():
         <section id="support" class="content-section">
             <h1>Support</h1>
             <p>Need help? We're here to assist you.</p>
-
+            
             <div class="support-grid">
                 <div class="support-card">
                     <i class="fas fa-discord fa-3x"></i>
@@ -1287,6 +1540,175 @@ for line in response.iter_lines():
                     <h3>Email Support</h3>
                     <p>For enterprise inquiries and technical issues, reach out via email.</p>
                     <a href="mailto:support@voltapi.online" class="btn btn-primary">Contact Us</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Refund Policy Section -->
+        <section id="refund-policy" class="content-section">
+            <h1>Refund Policy</h1>
+            <p class="lead">We strive to provide the best AI API service. Please review our refund policy carefully before subscribing.</p>
+            
+            <div class="info-card">
+                <h3><i class="fas fa-info-circle"></i> Policy Overview</h3>
+                <p>This refund policy applies to all VoltAI API subscription plans. We aim to be fair while protecting our service from abuse.</p>
+                <p><strong>Last Updated:</strong> January 2025</p>
+            </div>
+
+            <div class="policy-section">
+                <h2><i class="fas fa-ban"></i> Non-Refundable Conditions</h2>
+                <p>Refunds will <strong>NOT</strong> be issued under the following circumstances:</p>
+                
+                <div class="policy-card">
+                    <h4>1. Usage Thresholds Exceeded</h4>
+                    <ul>
+                        <li>If you have used a total of <strong>50 requests or more</strong></li>
+                        <li>If you have consumed <strong>5 million tokens or more</strong></li>
+                        <li>These limits apply cumulatively across all models and endpoints</li>
+                    </ul>
+                </div>
+
+                <div class="policy-card">
+                    <h4>2. Scheduled Maintenance</h4>
+                    <ul>
+                        <li>Downtime due to announced scheduled maintenance</li>
+                        <li>Complaints about service unavailability during maintenance windows</li>
+                        <li>We provide advance notice for all scheduled maintenance</li>
+                    </ul>
+                </div>
+
+                <div class="policy-card">
+                    <h4>3. Terms of Service Violations</h4>
+                    <ul>
+                        <li>Account suspension due to violation of our Terms of Service</li>
+                        <li>Abuse of API endpoints or rate limits</li>
+                        <li>Use of the service for prohibited activities</li>
+                    </ul>
+                </div>
+
+                <div class="policy-card">
+                    <h4>4. Change of Mind</h4>
+                    <ul>
+                        <li>Simply changing your mind after purchase</li>
+                        <li>Finding a cheaper alternative</li>
+                        <li>No longer needing the service for personal reasons</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2><i class="fas fa-check-circle"></i> Eligible for Refund</h2>
+                <p>You <strong>MAY</strong> be eligible for a refund in these situations:</p>
+                
+                <div class="policy-card success">
+                    <h4>1. Complete Service Failure</h4>
+                    <ul>
+                        <li>Unable to access <strong>ALL</strong> models for 24+ hours consecutively</li>
+                        <li>System-wide outage not related to scheduled maintenance</li>
+                        <li>Technical issues on our end preventing service usage</li>
+                        <li>Must be reported within 48 hours of the issue</li>
+                    </ul>
+                </div>
+
+                <div class="policy-card success">
+                    <h4>2. Billing Errors</h4>
+                    <ul>
+                        <li>Duplicate charges for the same subscription period</li>
+                        <li>Charged for a plan you didn't subscribe to</li>
+                        <li>Continued charges after cancellation confirmation</li>
+                    </ul>
+                </div>
+
+                <div class="policy-card success">
+                    <h4>3. First 7 Days Guarantee</h4>
+                    <ul>
+                        <li>New subscribers within first 7 days of initial purchase</li>
+                        <li>Must have used less than 50 requests AND less than 5M tokens</li>
+                        <li>Applies to first-time subscribers only</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2><i class="fas fa-clipboard-list"></i> Refund Request Process</h2>
+                
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h4>Submit Request</h4>
+                        <p>Contact our support team via Discord or email with your:</p>
+                        <ul>
+                            <li>API key (first and last 4 characters only)</li>
+                            <li>Subscription email</li>
+                            <li>Detailed reason for refund</li>
+                            <li>Evidence of service issues (if applicable)</li>
+                        </ul>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h4>Review Period</h4>
+                        <p>We will review your request within 3-5 business days. During this time:</p>
+                        <ul>
+                            <li>We may request additional information</li>
+                            <li>Your account usage will be audited</li>
+                            <li>Technical logs will be reviewed</li>
+                        </ul>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h4>Decision & Processing</h4>
+                        <p>If approved:</p>
+                        <ul>
+                            <li>Refund processed within 5-10 business days</li>
+                            <li>Funds returned to original payment method</li>
+                            <li>Account access may be terminated</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2><i class="fas fa-calculator"></i> Refund Calculations</h2>
+                
+                <div class="info-card">
+                    <h4>Partial Refunds</h4>
+                    <p>In some cases, we may offer partial refunds:</p>
+                    <ul>
+                        <li><strong>Pro-rated refunds:</strong> For extended service outages exceeding 48 hours</li>
+                        <li><strong>Credit refunds:</strong> Service credits for future use instead of monetary refunds</li>
+                        <li><strong>Plan downgrades:</strong> Difference refunded when moving to a lower tier</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2><i class="fas fa-exclamation-triangle"></i> Important Notes</h2>
+                
+                <div class="warning-card">
+                    <ul>
+                        <li>All refund decisions are final and at our sole discretion</li>
+                        <li>Abuse of the refund policy may result in permanent account suspension</li>
+                        <li>Refunds do not include any third-party fees or charges</li>
+                        <li>This policy may be updated at any time without prior notice</li>
+                        <li>By subscribing, you acknowledge and agree to this refund policy</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="contact-section">
+                <h2><i class="fas fa-envelope"></i> Contact Us</h2>
+                <p>For refund requests or questions about this policy:</p>
+                <div class="contact-methods">
+                    <a href="#" class="contact-card">
+                        <i class="fab fa-discord"></i>
+                        <span>Discord Support</span>
+                    </a>
+                    <a href="mailto:support@voltapi.online" class="contact-card">
+                        <i class="fas fa-envelope"></i>
+                        <span>support@voltapi.online</span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -1326,26 +1748,26 @@ document.addEventListener('click', (e) => {
 navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
-
+        
         // Remove active class from all links and sections
         navLinks.forEach(l => l.classList.remove('active'));
         contentSections.forEach(section => section.classList.remove('active'));
-
+        
         // Add active class to clicked link
         link.classList.add('active');
-
+        
         // Show corresponding section
         const targetId = link.getAttribute('href').substring(1);
         const targetSection = document.getElementById(targetId);
         if (targetSection) {
             targetSection.classList.add('active');
         }
-
+        
         // Close mobile menu if open
         if (window.innerWidth <= 768) {
             sidebar.classList.remove('active');
         }
-
+        
         // Scroll to top of page
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
@@ -1355,24 +1777,24 @@ navLinks.forEach(link => {
 function copyCode(button) {
     const codeBlock = button.closest('.code-block');
     const code = codeBlock.querySelector('code').textContent;
-
+    
     // Create temporary textarea
     const textarea = document.createElement('textarea');
     textarea.value = code;
     textarea.style.position = 'fixed';
     textarea.style.opacity = '0';
     document.body.appendChild(textarea);
-
+    
     // Select and copy
     textarea.select();
     document.execCommand('copy');
     document.body.removeChild(textarea);
-
+    
     // Show feedback
     const originalIcon = button.innerHTML;
     button.innerHTML = '<i class="fas fa-check"></i>';
     button.style.color = '#10b981';
-
+    
     setTimeout(() => {
         button.innerHTML = originalIcon;
         button.style.color = '';
@@ -1401,11 +1823,11 @@ navLinks.forEach(link => {
 // Search functionality
 searchInput.addEventListener('input', (e) => {
     const searchTerm = e.target.value.toLowerCase();
-
+    
     navLinks.forEach(link => {
         const linkText = link.textContent.toLowerCase();
         const parentItem = link.parentElement;
-
+        
         if (searchTerm === '' || linkText.includes(searchTerm)) {
             parentItem.style.display = 'block';
         } else {
@@ -1431,13 +1853,13 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && window.innerWidth <= 768) {
         sidebar.classList.remove('active');
     }
-
+    
     // Navigate sections with arrow keys
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
         const activeLink = document.querySelector('.nav-link.active');
         const allLinks = Array.from(navLinks);
         const currentIndex = allLinks.indexOf(activeLink);
-
+        
         if (e.key === 'ArrowDown' && currentIndex < allLinks.length - 1) {
             e.preventDefault();
             allLinks[currentIndex + 1].click();

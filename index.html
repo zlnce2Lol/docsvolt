@@ -1301,6 +1301,34 @@ tr:last-child td {
             <div class="pricing-grid">
                 <div class="pricing-card">
                     <div class="pricing-header">
+                        <h3>Basic</h3>
+                        <div class="price">Free</div>
+                    </div>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Access to Limited Models:</li>
+                        <li class="sub-feature">Claude 3 Haiku</li>
+                        <li class="sub-feature">GPT-3.5 Turbo</li>
+                        <li class="sub-feature">GPT-4o</li>
+                        <li class="sub-feature">GPT-4o Mini</li>
+                        <li class="sub-feature">GPT-4</li>
+                        <li class="sub-feature">Gemini 2.0 Flash</li>
+                        <li class="sub-feature">Gemini-2.5-flash-preview-05-20</li>
+                        <li class="sub-feature">Phi 4 Reasoning Plus</li>
+                        <li class="sub-feature">Llama-guard-4-12b</li>
+                        <li class="sub-feature">Llama 4 Scout</li>
+                        <li class="sub-feature">Llama 4 Maverick</li>
+                        <li class="sub-feature">Mixtral-8x7b-instruct</li>
+                        <li class="sub-feature">Mistralai/mistral-nemo</li>
+                        <li class="sub-feature">Meta-llama/llama-3.2-3b-instruct</li>
+                        <li class="sub-feature">Qwen/qwen3-30b-a3b</li>
+                        <li class="sub-feature">Command-a</li>
+                        <li><i class="fas fa-check"></i> 5 requests/minute</li>
+                        <li><i class="fas fa-check"></i> 500 requests/day</li>
+                    </ul>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-header">
                         <h3>Premium</h3>
                         <div class="price">$10<span>/month</span></div>
                     </div>
@@ -1524,14 +1552,19 @@ for line in response.iter_lines():
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Free</td>
-                            <td>10</td>
-                            <td>100 requests/day</td>
+                            <td>Basic (Free)</td>
+                            <td>5</td>
+                            <td>500 requests/day</td>
                         </tr>
                         <tr>
                             <td>Premium</td>
                             <td>20</td>
                             <td>Claude: 150/day<br>Others: 2,000/day</td>
+                        </tr>
+                        <tr>
+                            <td>Standard</td>
+                            <td>10</td>
+                            <td>Premium Models: 800/day<br>Claude: 20/day</td>
                         </tr>
                         <tr>
                             <td>Enterprise</td>

@@ -1238,7 +1238,7 @@ tr:last-child td {
         <!-- Image Models Section -->
         <section id="image-models" class="content-section">
             <h1>Image Generation Models</h1>
-            <p>Create stunning images with our FLUX models from Black Forest Labs.</p>
+            <p>Create stunning images with our FLUX models from Black Forest Labs and GPT Image models.</p>
             
             <div class="models-grid">
                 <div class="model-category">
@@ -1251,11 +1251,19 @@ tr:last-child td {
                         <li>black-forest-labs/FLUX.1-kontext-dev</li>
                     </ul>
                 </div>
+                
+                <div class="model-category">
+                    <h3><i class="fas fa-image"></i> GPT Image Models</h3>
+                    <ul class="model-list">
+                        <li>gpt-image-1</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="info-card">
                 <h3><i class="fas fa-info-circle"></i> Image Generation Usage</h3>
                 <p>Use the <code>/v1/images/generations</code> endpoint to generate images. Specify the model, prompt, and desired image size.</p>
+                <p><strong>Note:</strong> All plans include access to gpt-image-1 for image generation.</p>
             </div>
         </section>
 
@@ -1311,11 +1319,40 @@ tr:last-child td {
                         <li class="sub-feature">Kimi-K2</li>
                         <li class="sub-feature">Grok-4 (0709)</li>
                         <li class="sub-feature">FLUX.1 (Kontext Pro & Max)</li>
+                        <li class="sub-feature">gpt-image-1</li>
                         <li><i class="fas fa-check"></i> 20 requests/minute</li>
                         <li><i class="fas fa-check"></i> Daily limits:</li>
                         <li class="sub-feature">Claude models → 150 requests/day</li>
                         <li class="sub-feature">Other premium models → 2,000 requests/day</li>
                         <li><i class="fas fa-check"></i> Faster speeds and responses</li>
+                    </ul>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Standard</h3>
+                        <div class="price">$10<span> one-time</span></div>
+                    </div>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> One-time payment, lifetime access</li>
+                        <li><i class="fas fa-check"></i> A balanced plan for long-term AI use without monthly fees</li>
+                        <li><i class="fas fa-check"></i> Daily Limits:</li>
+                        <li class="sub-feature">10 requests/minute on Premium Models</li>
+                        <li class="sub-feature">800 requests/day on Premium Models</li>
+                        <li class="sub-feature">20 requests/day on all Claude models</li>
+                        <li><i class="fas fa-check"></i> Included Models:</li>
+                        <li class="sub-feature">Claude 3.5 & 3.7 (Sonnet)</li>
+                        <li class="sub-feature">claude-sonnet-4-20250514-thinking</li>
+                        <li class="sub-feature">Claude Sonnet 4 (2025-05-14)</li>
+                        <li class="sub-feature">GPT-5 NANO</li>
+                        <li class="sub-feature">GPT-5 MINI</li>
+                        <li class="sub-feature">GPT-5</li>
+                        <li class="sub-feature">Gemini 2.5 Pro</li>
+                        <li class="sub-feature">DeepSeek R1</li>
+                        <li class="sub-feature">Kimi-K2</li>
+                        <li class="sub-feature">Grok-4 (0709)</li>
+                        <li class="sub-feature">FLUX.1 (Kontext Pro & Max)</li>
+                        <li class="sub-feature">gpt-image-1</li>
                     </ul>
                 </div>
 
@@ -1327,6 +1364,7 @@ tr:last-child td {
                     </div>
                     <ul class="features-list">
                         <li><i class="fas fa-check"></i> All Premium models included</li>
+                        <li><i class="fas fa-check"></i> Access to gpt-image-1</li>
                         <li><i class="fas fa-check"></i> Usage Limits:</li>
                         <li class="sub-feature">Claude 4 Opus → 500 messages/day (80k context)</li>
                         <li class="sub-feature">Claude 4.1 Opus → 350 messages/day (80k context)</li>
